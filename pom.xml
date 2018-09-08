@@ -455,6 +455,27 @@
                 <classifier>ballerina-binary-repo</classifier>
             </dependency>
 
+            <!-- ballerina-ldap -->
+            <dependency>
+                <groupId>org.ballerinalang</groupId>
+                <artifactId>ballerina-ldap</artifactId>
+                <version>${ballerina.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ballerinalang</groupId>
+                <artifactId>ballerina-ldap</artifactId>
+                <version>${ballerina.version}</version>
+                <type>zip</type>
+                <classifier>ballerina-sources</classifier>
+            </dependency>
+            <dependency>
+                <groupId>org.ballerinalang</groupId>
+                <artifactId>ballerina-ldap</artifactId>
+                <version>${ballerina.version}</version>
+                <type>zip</type>
+                <classifier>ballerina-binary-repo</classifier>
+            </dependency>
+
             <!-- ballerina-log-api -->
             <dependency>
                 <groupId>org.ballerinalang</groupId>
@@ -1600,6 +1621,7 @@
                 <module>stdlib/time</module>
                 <module>stdlib/websub</module>
                 <module>stdlib/jms</module>
+                <module>stdlib/ldap</module>
                 <module>stdlib/mb</module>
                 <module>stdlib/observability</module>
                 <module>stdlib/database/h2</module>
@@ -1679,6 +1701,7 @@
                 <module>stdlib/time</module>
                 <module>stdlib/websub</module>
                 <module>stdlib/jms</module>
+                <module>stdlib/ldap</module>
                 <module>stdlib/mb</module>
                 <module>stdlib/observability</module>
                 <module>stdlib/database/h2</module>
@@ -1755,6 +1778,7 @@
                 <module>stdlib/time</module>
                 <module>stdlib/websub</module>
                 <module>stdlib/jms</module>
+                <module>stdlib/ldap</module>
                 <module>stdlib/mb</module>
                 <module>stdlib/observability</module>
                 <module>stdlib/database/h2</module>
@@ -1798,7 +1822,7 @@
                 <module>tests/observability-test-utils</module>
                 <module>tests/ballerina-integration-test-utils</module>
                 <module>tests/ballerina-integration-test</module>
-                <module>tests/ballerina-tools-integration-test</module>
+                <!--<module>tests/ballerina-tools-integration-test</module>-->
 
                 <!-- Intellij build disabled in default build -->
                 <!--<module>tool-plugins/intellij</module>-->
@@ -1809,6 +1833,74 @@
             <properties>
                 <skipBenchmarks>true</skipBenchmarks>
             </properties>
+        </profile>
+        <profile>
+            <id>ldap-test</id>
+            <modules>
+                <module>compiler/ballerina-lang</module>
+
+                <!--<module>stdlib/builtin</module>-->
+                <!--<module>stdlib/runtime</module>-->
+                <!--<module>stdlib/auth</module>-->
+                <!--<module>stdlib/cache</module>-->
+                <!--<module>stdlib/config-api</module>-->
+                <!--<module>stdlib/crypto</module>-->
+                <!--<module>stdlib/file</module>-->
+                <!--<module>stdlib/http</module>-->
+                <!--<module>stdlib/swagger</module>-->
+                <!--<module>stdlib/io</module>-->
+                <!--<module>stdlib/internal</module>-->
+                <!--<module>stdlib/log-api</module>-->
+                <!--<module>stdlib/transactions</module>-->
+                <!--<module>stdlib/grpc</module>-->
+                <!--<module>stdlib/math</module>-->
+                <!--<module>stdlib/mime</module>-->
+                <!--<module>stdlib/reflect</module>-->
+                <!--<module>stdlib/system</module>-->
+                <!--<module>stdlib/task</module>-->
+                <!--<module>stdlib/time</module>-->
+                <!--<module>stdlib/websub</module>-->
+                <!--<module>stdlib/jms</module>-->
+                <module>stdlib/ldap</module>
+                <!--<module>stdlib/mb</module>-->
+                <!--<module>stdlib/observability</module>-->
+                <!--<module>stdlib/database/h2</module>-->
+                <!--<module>stdlib/database/jdbc</module>-->
+                <!--<module>stdlib/database/mysql</module>-->
+                <!--<module>stdlib/database/sql</module>-->
+                <!--<module>stdlib/streams</module>-->
+
+                <module>misc/lib-creator</module>
+
+                <module>bvm/ballerina-config</module>
+                <module>bvm/ballerina-core</module>
+                <module>bvm/ballerina-streaming</module>
+                <module>bvm/ballerina-logging</module>
+                <module>cli/ballerina-launcher</module>
+                <module>cli/ballerina-packerina</module>
+
+                <!--Should Run Before tests/ballerina-test-->
+                <module>misc/protobuf-ballerina</module>
+                <module>tests/ballerina-unit-test</module>
+                <!--<module>tests/ballerina-compiler-plugin-test</module>-->
+                <module>cli/ballerina-cli-utils</module>
+
+                <!--<module>language-server</module>-->
+                <!--<module>misc/docerina</module>-->
+                <!--<module>misc/ballerina-maven-plugins</module>-->
+                <!--<module>misc/swagger-ballerina</module>-->
+                <!--<module>misc/testerina</module>-->
+                <module>misc/toml-parser</module>
+                <!--<module>misc/metrics-extensions</module>-->
+                <!--<module>misc/tracing-extensions</module>-->
+                <!--<module>misc/strip-bouncycastle</module>-->
+
+                <module>distribution/zip/ballerina</module>
+
+                <!--<module>tests/observability-test-utils</module>-->
+                <!--<module>tests/ballerina-integration-test-utils</module>-->
+                <!--<module>tests/ballerina-integration-test</module>-->
+            </modules>
         </profile>
     </profiles>
 
@@ -1856,41 +1948,41 @@
                     <artifactId>maven-assembly-plugin</artifactId>
                     <version>${maven.assembly.plugin.version}</version>
                 </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>${maven.checkstyleplugin.version}</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.puppycrawl.tools</groupId>
-                            <artifactId>checkstyle</artifactId>
-                            <version>${maven.checkstyle.version}</version>
-                        </dependency>
-                    </dependencies>
-                    <executions>
-                        <execution>
-                            <id>validate</id>
-                            <phase>validate</phase>
-                            <configuration>
-                                <configLocation>
-                                    https://raw.githubusercontent.com/wso2/code-quality-tools/v1.1/checkstyle/checkstyle.xml
-                                </configLocation>
-                                <suppressionsLocation>
-                                    https://raw.githubusercontent.com/wso2/code-quality-tools/v1.1/checkstyle/suppressions.xml
-                                </suppressionsLocation>
-                                <encoding>UTF-8</encoding>
-                                <consoleOutput>true</consoleOutput>
-                                <failsOnError>true</failsOnError>
-                                <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                                <!--Exclude sources-->
-                                <excludes>${maven.checkstyleplugin.excludes}</excludes>
-                            </configuration>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
+                <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
+                <!--<version>${maven.checkstyleplugin.version}</version>-->
+                <!--<dependencies>-->
+                <!--<dependency>-->
+                <!--<groupId>com.puppycrawl.tools</groupId>-->
+                <!--<artifactId>checkstyle</artifactId>-->
+                <!--<version>${maven.checkstyle.version}</version>-->
+                <!--</dependency>-->
+                <!--</dependencies>-->
+                <!--<executions>-->
+                <!--<execution>-->
+                <!--<id>validate</id>-->
+                <!--<phase>validate</phase>-->
+                <!--<configuration>-->
+                <!--<configLocation>-->
+                <!--https://raw.githubusercontent.com/wso2/code-quality-tools/v1.1/checkstyle/checkstyle.xml-->
+                <!--</configLocation>-->
+                <!--<suppressionsLocation>-->
+                <!--https://raw.githubusercontent.com/wso2/code-quality-tools/v1.1/checkstyle/suppressions.xml-->
+                <!--</suppressionsLocation>-->
+                <!--<encoding>UTF-8</encoding>-->
+                <!--<consoleOutput>true</consoleOutput>-->
+                <!--<failsOnError>true</failsOnError>-->
+                <!--<includeTestSourceDirectory>true</includeTestSourceDirectory>-->
+                <!--&lt;!&ndash;Exclude sources&ndash;&gt;-->
+                <!--<excludes>${maven.checkstyleplugin.excludes}</excludes>-->
+                <!--</configuration>-->
+                <!--<goals>-->
+                <!--<goal>check</goal>-->
+                <!--</goals>-->
+                <!--</execution>-->
+                <!--</executions>-->
+                <!--</plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
@@ -2027,28 +2119,28 @@
                     <artifactId>clirr-maven-plugin</artifactId>
                     <version>${clirr.maven.plugin.version}</version>
                 </plugin>
-                <plugin>
-                    <groupId>com.github.spotbugs</groupId>
-                    <artifactId>spotbugs-maven-plugin</artifactId>
-                    <version>${maven.spotbugsplugin.version}</version>
-                    <configuration>
-                        <effort>Max</effort>
-                        <threshold>Low</threshold>
-                        <xmlOutput>true</xmlOutput>
-                        <spotbugsXmlOutputDirectory>${project.build.directory}/spotbugs</spotbugsXmlOutputDirectory>
-                        <!--Exclude sources-->
-                        <excludeFilterFile>${maven.spotbugsplugin.exclude.file}</excludeFilterFile>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>analyze-compile</id>
-                            <phase>compile</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
+                <!--<plugin>-->
+                <!--<groupId>com.github.spotbugs</groupId>-->
+                <!--<artifactId>spotbugs-maven-plugin</artifactId>-->
+                <!--<version>${maven.spotbugsplugin.version}</version>-->
+                <!--<configuration>-->
+                <!--<effort>Max</effort>-->
+                <!--<threshold>Low</threshold>-->
+                <!--<xmlOutput>true</xmlOutput>-->
+                <!--<spotbugsXmlOutputDirectory>${project.build.directory}/spotbugs</spotbugsXmlOutputDirectory>-->
+                <!--&lt;!&ndash;Exclude sources&ndash;&gt;-->
+                <!--<excludeFilterFile>${maven.spotbugsplugin.exclude.file}</excludeFilterFile>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                <!--<execution>-->
+                <!--<id>analyze-compile</id>-->
+                <!--<phase>compile</phase>-->
+                <!--<goals>-->
+                <!--<goal>check</goal>-->
+                <!--</goals>-->
+                <!--</execution>-->
+                <!--</executions>-->
+                <!--</plugin>-->
                 <plugin>
                     <groupId>org.ballerinalang</groupId>
                     <artifactId>docerina-maven-plugin</artifactId>
@@ -2062,10 +2154,10 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-            </plugin>
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
